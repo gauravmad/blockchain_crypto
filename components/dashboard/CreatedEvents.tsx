@@ -26,7 +26,12 @@ export default function CreatedEvents() {
   
   useEffect(() => {
     setTimeout(() => {
-      setEvents(mockCreatedEvents);
+      setEvents(
+        mockCreatedEvents.map((event) => ({
+          ...event,
+          revenue: typeof event.revenue === "string" ? parseFloat(event.revenue) : event.revenue,
+        }))
+      );
       setLoading(false);
     }, 1000);
   }, []);
